@@ -1,0 +1,38 @@
+<ng-container *ngIf="users$ | async as users; else noData">
+  <div class="mat-elevation-z4 p-4">
+    <div class="mat-typography">
+      <h1>Usuarios <small>- Legacy</small></h1>
+      <h2>Total de usuarios: {{ users.length }}</h2>
+      <mat-divider></mat-divider>
+    </div>
+
+    <app-user-legacy [users]="users"></app-user-legacy>
+  </div>
+</ng-container>
+
+<ng-template #noData>
+  <div class="mat-elevation-z4 p-4 text-center">
+    <h3>No data available</h3>
+    <mat-icon>warning</mat-icon>
+    <p>Please try reloading the data or check back later.</p>
+  </div>
+</ng-template>
+
+<div
+  style="
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+  "
+>
+  <button mat-raised-button color="primary" (click)="loadPage(1)">
+    <mat-icon>refresh</mat-icon>
+    Restart
+  </button>
+  <button mat-raised-button color="accent" (click)="loadPage(currentPage + 1)">
+    <mat-icon>arrow_forward</mat-icon>
+    Load ({{ currentPage }})
+  </button>
+</div>
